@@ -1,4 +1,15 @@
 .DS_Store
+
+# javascript
 node_modules
 target
+
+# clojure
+.clj-kondo
 .lein-failures
+.lsp
+.nrepl-port
+
+# fsharp
+bin
+obj
