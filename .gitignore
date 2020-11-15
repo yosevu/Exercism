@@ -1,8 +1,10 @@
 .DS_Store
 
-# javascript
-node_modules
-target
+# lsp
+.log
+
+# Exercism
+.exercism
 
 # clojure
 .clj-kondo
@@ -13,3 +15,11 @@ target
 # fsharp
 bin
 obj
+
+# haskell
+*.cabal
+.stack-work
+
+# javascript
+node_modules
+target
