@@ -17,6 +17,9 @@
 .cpcache
 cljs-test-runner-out
 
+# elm
+elm-stuff
+
 # fsharp
 bin
 obj
