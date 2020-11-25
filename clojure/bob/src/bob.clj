@@ -9,11 +9,21 @@
 (defn question?
   "Returns true if s is a question."
   [s]
-  (= (last (str/trim s)) \?))
+  (str/ends-with? (str/trim s) "?"))
 
 (defn response-for [s]
-  (cond (str/blank? s) "Fine. Be that way!"
-        (and (question? s) (not (upper-case? s))) "Sure."
-        (and (upper-case? s) (not (question? s))) "Whoa, chill out!"
-        (and (question? s) (upper-case? s)) "Calm down, I know what I'm doing!"
-        :else "Whatever."))
+  (cond
+    (and (question? s) (not (upper-case? s))) "Sure."
+    (and (upper-case? s) (not (question? s))) "Whoa, chill out!"
+    (and (question? s) (upper-case? s)) "Calm down, I know what I'm doing!"
+    (str/blank? s) "Fine. Be that way!"
+    :else "Whatever."))
+
+;; Implicit order dependency. Thhe most specific condition has to be first.
+;; (defn response-for [s]
+;;   (cond
+;;     (and (question? s) (upper-case? s)) "Calm down, I know what I'm doing!"
+;;     (question? s) "Sure."
+;;     (upper-case? s) "Whoa, chill out!"
+;;     (str/blank? s) "Fine. Be that way!"
+;;     :else "Whatever."))
