@@ -3,16 +3,13 @@ const NUCLEOTIDES = {
   C: 'G',
   T: 'A',
   A: 'U',
-};
+}
 
-const transformStrand = dnaStrand =>dnaStrand
+const toRna = dnaStrand => dnaStrand
       .split('')
       .map(nucleotide => NUCLEOTIDES[nucleotide])
-      .join('');
-
-const toRna = dnaStrand =>
-  (dnaStrand ? transformStrand(dnaStrand) : '');
+      .join('')
 
 export {
   toRna,
-};
+}
