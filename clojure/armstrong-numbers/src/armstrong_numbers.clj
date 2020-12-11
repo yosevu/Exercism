@@ -1,22 +1,23 @@
-(ns armstrong-numbers
-  (:require  [clojure.string :as str]))
+(ns armstrong-numbers)
+
+(defn num->digits
+  "Returns n a list of string digits."
+  [n]
+  (->> n
+       (iterate #(quot % 10))
+       (take-while pos?)
+       (map #(rem % 10))))
 
 (defn pow
-  "Returns base to exp power."
+  "Returns x to the n power."
   [base exp]
-  (reduce * (repeat exp base)))
-
-(defn num->num-coll
-  "Returns num as list strings."
-  [n]
-  (map #(Integer/parseInt %) (str/split (str n) #"")))
-
-(defn armstrong-number
-  "Calculates armstrong number."
-  [len acc x]
-  (+ acc (pow x len)))
+  (apply * (repeat exp base)))
 
 (defn armstrong?
   "Returns true if n is an armstrong number, false otherwise."
-  [n]
-  (= (reduce (partial armstrong-number (count (str n))) 0 (num->num-coll n)) n))
+  [num]
+  (let [digits (num->digits num)]
+    (->> digits
+         (map #(pow % (count digits)))
+         (apply +)
+         (= num))))
