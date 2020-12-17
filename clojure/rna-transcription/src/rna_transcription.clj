@@ -4,6 +4,6 @@
 (def nucleotides {\G \C \C \G \T \A \A \U})
 
 (defn to-rna [dna]
-  (let [rna (apply str (map #(nucleotides %) dna))]
-    (assert (every? #(contains? nucleotides %) dna))
+  (let [rna (apply str (map nucleotides dna))]
+    (assert (= (count rna) (count dna)))
     rna))
