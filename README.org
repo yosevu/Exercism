@@ -4,10 +4,13 @@
 - Common Lisp
 - Elixir
 - Elm
-- Emacs Lisp
 - F#
+- Emacs Lisp
 - Haskell
 - JavaScript
 - Prolog
+- Racket
 - Reason
+- Rust
 - Scala
+- Scheme
