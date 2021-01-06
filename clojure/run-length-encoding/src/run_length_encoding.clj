@@ -1,21 +1,30 @@
 (ns run-length-encoding
   (:require [clojure.string :as str]))
 
+(defn encode-run
+  "Encode a run of characters into a string."
+  [[head & tail :as run]]
+  (cond->> head
+    tail (str (count run))))
+
 (defn run-length-encode
-  "encodes a string with run-length-encoding"
+  "Encode runs of characters into a string."
   [plain-text]
-  (let [runs (re-seq #"(\w|\W)\1*" plain-text)]
-    (apply str (filter #(not= 1 %) (interleave (map count (map first runs))
-                                               (map last runs))))))
+  (->> plain-text
+       (partition-by identity)
+       (map encode-run)
+       (apply str)))
+
 (defn decode-run
-  "decode a single run in a run-length encoded sting"
-  [run]
-  (let [seqs (re-seq #"\d+|\D" run)]
-    (if (Character/isDigit (first (first seqs)))
-      (apply str (repeat (Integer/parseInt (first seqs)) (last seqs)))
-      (str (first seqs)))))
+  "Decode a run into a string of characters."
+  [[_ digit character]]
+  (cond->> character
+    (seq digit) (repeat (Integer/parseInt digit))))
 
 (defn run-length-decode
-  "decodes a run-length-encoded string"
+  "Decode runs into a string."
   [cipher-text]
-  (apply str (map decode-run (re-seq #"\d*\D" cipher-text))))
+  (->> cipher-text
+       (re-seq #"(\d*)(\D)")
+       (mapcat decode-run)
+       (apply str)))
