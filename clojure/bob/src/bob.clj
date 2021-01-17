@@ -19,7 +19,7 @@
     (str/blank? s) "Fine. Be that way!"
     :else "Whatever."))
 
-;; Implicit order dependency. Thhe most specific condition has to be first.
+;; Implicit order dependency. The most specific condition has to be first.
 ;; (defn response-for [s]
 ;;   (cond
 ;;     (and (question? s) (upper-case? s)) "Calm down, I know what I'm doing!"
